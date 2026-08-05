@@ -74,7 +74,9 @@ final class PanelController: NSObject, NSWindowDelegate {
         session.ensureStarted()
 
         panel.alphaValue = 1
-        activateApp()
+        // Ordering front must precede activation: activating an accessory app
+        // first makes macOS leave the foreground app's full-screen Space, and
+        // the panel then lands on the Space behind it.
         panel.makeKeyAndOrderFront(nil)
 
         isVisible = true
@@ -87,10 +89,14 @@ final class PanelController: NSObject, NSWindowDelegate {
         } completionHandler: { [weak self] in
             guard let self else { return }
             self.isAnimating = false
+            if !NSApp.isActive { self.activateApp() }
+            self.panel.makeKey()
             self.focusTerminal()
             PanelLog.logger.info("""
                 shown: key=\(self.panel.isKeyWindow, privacy: .public) \
-                active=\(NSApp.isActive, privacy: .public)
+                active=\(NSApp.isActive, privacy: .public) \
+                visible=\(self.panel.isVisible, privacy: .public) \
+                activeSpace=\(self.panel.isOnActiveSpace, privacy: .public)
                 """)
         }
     }
@@ -138,11 +144,10 @@ final class PanelController: NSObject, NSWindowDelegate {
     }
 
     private func activateApp() {
-        if #available(macOS 14.0, *) {
-            NSApp.activate()
-        } else {
-            NSApp.activate(ignoringOtherApps: true)
-        }
+        // `activate()` is cooperative on macOS 14+ and may refuse an accessory
+        // app while another application owns the current full-screen Space.
+        // The global hotkey is an explicit user action, so force activation.
+        NSApp.activate(ignoringOtherApps: true)
     }
 
     private func focusTerminal() {
