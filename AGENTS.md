@@ -59,6 +59,11 @@ These are load-bearing; breaking them produces bugs that look unrelated.
 - **No Accessibility permission.** The global hotkey uses Carbon
   `RegisterEventHotKey`, deliberately, so the app needs no TCC prompt. Do not
   replace it with a `CGEvent` tap.
+- **Never activate on show.** `NSApp.activate` from an accessory app while a
+  full-screen Space is frontmost parks the panel on the Space behind it. The
+  panel is a `.nonactivatingPanel`; `orderFrontRegardless()` then `makeKey()`
+  is enough for typing. Do not put `canJoinAllSpaces` back: it does not include
+  full-screen Spaces and it suppresses `moveToActiveSpace`.
 
 ## Boundaries
 

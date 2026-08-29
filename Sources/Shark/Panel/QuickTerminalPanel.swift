@@ -15,9 +15,11 @@ final class QuickTerminalPanel: NSPanel {
     init() {
         super.init(
             contentRect: NSRect(x: 0, y: 0, width: 800, height: 400),
-            // No `.nonactivatingPanel`: B+1 wants the panel to take focus so the
-            // user can type immediately, and to be dismissed the moment it loses it.
-            styleMask: [.borderless, .fullSizeContentView],
+            // `.nonactivatingPanel` is what lets a menu-bar agent overlay a
+            // full-screen Space. Activating the app instead makes macOS park
+            // the panel on the Space behind it. `canBecomeKey` + `makeKey()`
+            // still give the terminal typing focus.
+            styleMask: [.borderless, .fullSizeContentView, .nonactivatingPanel],
             backing: .buffered,
             defer: false
         )
@@ -35,8 +37,10 @@ final class QuickTerminalPanel: NSPanel {
         hasShadow = true
 
         animationBehavior = .none
-        // Excluded from Mission Control / app switching; it is a HUD, not a document.
-        collectionBehavior = [.canJoinAllSpaces, .fullScreenAuxiliary, .stationary, .ignoresCycle]
+        // `canJoinAllSpaces` does not include full-screen Spaces and it
+        // suppresses `moveToActiveSpace`. Order-front then joins the Space
+        // the user is actually looking at, including native full-screen.
+        collectionBehavior = [.moveToActiveSpace, .fullScreenAuxiliary, .stationary, .ignoresCycle]
 
         applyLevel(AppSettings.shared.panelLevel)
     }

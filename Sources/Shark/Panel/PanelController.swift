@@ -63,24 +63,35 @@ final class PanelController: NSObject, NSWindowDelegate {
 
         ignoreResignUntil = Date().addingTimeInterval(resignGracePeriod)
 
+        let front = NSWorkspace.shared.frontmostApplication?.bundleIdentifier ?? "none"
         let screen = ScreenLocator.targetScreen()
         let endFrame = ScreenLocator.visibleFrame(on: screen)
         panel.applyLevel(AppSettings.shared.panelLevel)
-        panel.setFrame(ScreenLocator.hiddenFrame(on: screen), display: false)
+
+        // Land on the target screen first so Space assignment sees a real
+        // intersection. Ordering front from an off-screen frame is how the
+        // panel used to miss native full-screen Spaces.
+        panel.alphaValue = 0
+        panel.setFrame(endFrame, display: false)
 
         // The shell must not start before the terminal view knows its size, or the
         // first prompt is written into a zero-sized grid and never reappears.
         panel.contentView?.layoutSubtreeIfNeeded()
         session.ensureStarted()
 
-        panel.alphaValue = 1
-        // Ordering front must precede activation: activating an accessory app
-        // first makes macOS leave the foreground app's full-screen Space, and
-        // the panel then lands on the Space behind it.
-        panel.makeKeyAndOrderFront(nil)
+        // Never `NSApp.activate` here. An accessory app that activates while a
+        // full-screen Space is frontmost is moved to the Space behind it.
+        panel.orderFrontRegardless()
+        PanelLog.logger.notice("""
+            fronted: activeSpace=\(self.panel.isOnActiveSpace, privacy: .public) \
+            front=\(front, privacy: .public)
+            """)
 
         isVisible = true
         isAnimating = true
+
+        panel.setFrame(ScreenLocator.hiddenFrame(on: screen), display: false)
+        panel.alphaValue = 1
 
         NSAnimationContext.runAnimationGroup { context in
             context.duration = animationDuration
@@ -89,14 +100,16 @@ final class PanelController: NSObject, NSWindowDelegate {
         } completionHandler: { [weak self] in
             guard let self else { return }
             self.isAnimating = false
-            if !NSApp.isActive { self.activateApp() }
             self.panel.makeKey()
             self.focusTerminal()
-            PanelLog.logger.info("""
+            PanelLog.logger.notice("""
                 shown: key=\(self.panel.isKeyWindow, privacy: .public) \
                 active=\(NSApp.isActive, privacy: .public) \
                 visible=\(self.panel.isVisible, privacy: .public) \
-                activeSpace=\(self.panel.isOnActiveSpace, privacy: .public)
+                activeSpace=\(self.panel.isOnActiveSpace, privacy: .public) \
+                front=\(front, privacy: .public) \
+                target=\(Int(screen.frame.minX), privacy: .public) \
+                landed=\(Int(self.panel.screen?.frame.minX ?? -9999), privacy: .public)
                 """)
         }
     }
@@ -108,7 +121,7 @@ final class PanelController: NSObject, NSWindowDelegate {
             guard !suppressAutoHide, Date() >= ignoreResignUntil else { return }
         }
 
-        PanelLog.logger.info("""
+        PanelLog.logger.notice("""
             hide: reason=\(String(describing: reason), privacy: .public) \
             key=\(self.panel.isKeyWindow, privacy: .public) \
             active=\(NSApp.isActive, privacy: .public)
@@ -138,16 +151,8 @@ final class PanelController: NSObject, NSWindowDelegate {
         suppressAutoHide = false
         guard isVisible else { return }
         ignoreResignUntil = Date().addingTimeInterval(resignGracePeriod)
-        activateApp()
         panel.makeKey()
         focusTerminal()
-    }
-
-    private func activateApp() {
-        // `activate()` is cooperative on macOS 14+ and may refuse an accessory
-        // app while another application owns the current full-screen Space.
-        // The global hotkey is an explicit user action, so force activation.
-        NSApp.activate(ignoringOtherApps: true)
     }
 
     private func focusTerminal() {
