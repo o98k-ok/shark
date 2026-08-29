@@ -1,0 +1,21 @@
+{
+  "background": [
+    "#0B0F14",
+    "#1B2A33"
+  ],
+  "bgAngle": 165,
+  "subject": {
+    "from": "src/mdi_shark.svg",
+    "source": "mdi:shark",
+    "license": "Apache-2.0",
+    "fill": [
+      "#9FF3FF",
+      "#2E7C93"
+    ],
+    "widthPct": 0.74,
+    "cy": 0.5
+  },
+  "name": "d-body-dark",
+  "glass": true,
+  "grain": 0.06
+}

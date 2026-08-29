@@ -76,6 +76,9 @@ These are load-bearing; breaking them produces bugs that look unrelated.
   to the binary cdhash, so Files and Folders grants die on every rebuild. This
   is still not a distributable, notarized build.
 - Version strings live in the `Info.plist` heredoc inside `Scripts/build-app.sh`.
+- App icon is `Assets/icon/AppIcon.icns`, built from `Assets/icon/spec.json`.
+  Menu bar glyph is `Assets/icon/MenuBar.pdf` (template). `build-app.sh` copies both;
+  do not hand-draw SVG into the bundle.
 - `Scripts/install.sh` refuses to write an unwritable destination instead of
   escalating; never add `sudo` to it. `SHARK_INSTALL_DIR` overrides the target,
   which is also how to exercise it without touching `/Applications`.

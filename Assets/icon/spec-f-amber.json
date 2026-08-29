@@ -1,0 +1,23 @@
+{
+  "background": [
+    "#1A0E04",
+    "#8A4B08"
+  ],
+  "bgAngle": 165,
+  "subject": {
+    "from": "src/mdi_shark.svg",
+    "source": "mdi:shark",
+    "license": "Apache-2.0",
+    "fill": [
+      "#FFF3D6",
+      "#F0A227"
+    ],
+    "widthPct": 0.74,
+    "cy": 0.5,
+    "opacity": 0.75,
+    "rimWidth": 9
+  },
+  "name": "f-amber",
+  "glass": true,
+  "grain": 0.06
+}

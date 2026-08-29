@@ -1,0 +1,22 @@
+{
+  "background": [
+    "#07120C",
+    "#125E33"
+  ],
+  "bgAngle": 170,
+  "subject": {
+    "from": "src/mdi_shark-fin.svg",
+    "source": "mdi:shark-fin",
+    "license": "Apache-2.0",
+    "fill": [
+      "#D6FFE6",
+      "#2ED573"
+    ],
+    "widthPct": 0.62,
+    "cy": 0.5,
+    "opacity": 0.82
+  },
+  "name": "h-fin-green",
+  "glass": true,
+  "grain": 0.06
+}

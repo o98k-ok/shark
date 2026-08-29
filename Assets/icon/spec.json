@@ -1,0 +1,28 @@
+{
+  "name": "Shark",
+  "recipe": "C",
+
+  "background": ["#06131F", "#0E6070"],
+  "bgAngle": 165,
+
+  "subject": {
+    "from": "src/mdi_shark.svg",
+    "source": "mdi:shark",
+    "license": "Apache-2.0",
+
+    "fill": ["#F2FAFD", "#5B8DA3"],
+    "keepColors": false,
+
+    "widthPct": 0.74,
+    "maxHeightPct": 0.72,
+    "cx": 0.5,
+    "cy": 0.48,
+    "flipX": false
+  },
+
+  "glass": true,
+  "grain": 0.06,
+  "corner": "ios26",
+
+  "overlay": []
+}

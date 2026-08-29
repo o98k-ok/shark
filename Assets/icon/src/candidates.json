@@ -1,0 +1,104 @@
+[
+  {
+    "icon": "mdi:shark",
+    "spdx": "Apache-2.0",
+    "collection": "Material Design Icons",
+    "file": "/Users/shadow/Documents/code/shark/Assets/icon/src/mdi_shark.svg"
+  },
+  {
+    "icon": "lucide-lab:shark",
+    "spdx": "ISC",
+    "collection": "Lucide Lab",
+    "file": "/Users/shadow/Documents/code/shark/Assets/icon/src/lucide-lab_shark.svg"
+  },
+  {
+    "icon": "picon:shark",
+    "spdx": "OFL-1.1",
+    "collection": "Pico-icon",
+    "file": "/Users/shadow/Documents/code/shark/Assets/icon/src/picon_shark.svg"
+  },
+  {
+    "icon": "dinkie-icons:shark",
+    "spdx": "MIT",
+    "collection": "Dinkie Icons",
+    "file": "/Users/shadow/Documents/code/shark/Assets/icon/src/dinkie-icons_shark.svg"
+  },
+  {
+    "icon": "noto:shark",
+    "spdx": "Apache-2.0",
+    "collection": "Noto Emoji",
+    "file": "/Users/shadow/Documents/code/shark/Assets/icon/src/noto_shark.svg"
+  },
+  {
+    "icon": "fluent-emoji-flat:shark",
+    "spdx": "MIT",
+    "collection": "Fluent Emoji Flat",
+    "file": "/Users/shadow/Documents/code/shark/Assets/icon/src/fluent-emoji-flat_shark.svg"
+  },
+  {
+    "icon": "fluent-emoji-high-contrast:shark",
+    "spdx": "MIT",
+    "collection": "Fluent Emoji High Contrast",
+    "file": "/Users/shadow/Documents/code/shark/Assets/icon/src/fluent-emoji-high-contrast_shark.svg"
+  },
+  {
+    "icon": "noto-v1:shark",
+    "spdx": "Apache-2.0",
+    "collection": "Noto Emoji (v1)",
+    "file": "/Users/shadow/Documents/code/shark/Assets/icon/src/noto-v1_shark.svg"
+  },
+  {
+    "icon": "mdi:shark-fin",
+    "spdx": "Apache-2.0",
+    "collection": "Material Design Icons",
+    "file": "/Users/shadow/Documents/code/shark/Assets/icon/src/mdi_shark-fin.svg"
+  },
+  {
+    "icon": "mdi:shark-fin-outline",
+    "spdx": "Apache-2.0",
+    "collection": "Material Design Icons",
+    "file": "/Users/shadow/Documents/code/shark/Assets/icon/src/mdi_shark-fin-outline.svg"
+  },
+  {
+    "icon": "mdi:shark-off",
+    "spdx": "Apache-2.0",
+    "collection": "Material Design Icons",
+    "file": "/Users/shadow/Documents/code/shark/Assets/icon/src/mdi_shark-off.svg"
+  },
+  {
+    "icon": "lucide-lab:waves-shark-fin",
+    "spdx": "ISC",
+    "collection": "Lucide Lab",
+    "file": "/Users/shadow/Documents/code/shark/Assets/icon/src/lucide-lab_waves-shark-fin.svg"
+  },
+  {
+    "icon": "pinhead:shark-dorsal-fin-in-water",
+    "spdx": "CC0-1.0",
+    "collection": "Pinhead Map Icons",
+    "file": "/Users/shadow/Documents/code/shark/Assets/icon/src/pinhead_shark-dorsal-fin-in-water.svg"
+  },
+  {
+    "icon": "pinhead:shark-dorsal-fin-in-waters",
+    "spdx": "CC0-1.0",
+    "collection": "Pinhead Map Icons",
+    "file": "/Users/shadow/Documents/code/shark/Assets/icon/src/pinhead_shark-dorsal-fin-in-waters.svg"
+  },
+  {
+    "icon": "simple-icons:surfshark",
+    "spdx": "CC0-1.0",
+    "collection": "Simple Icons",
+    "file": "/Users/shadow/Documents/code/shark/Assets/icon/src/simple-icons_surfshark.svg"
+  },
+  {
+    "icon": "thesvg:surfshark",
+    "spdx": "MIT",
+    "collection": "theSVG",
+    "file": "/Users/shadow/Documents/code/shark/Assets/icon/src/thesvg_surfshark.svg"
+  },
+  {
+    "icon": "simple-icons:wireshark",
+    "spdx": "CC0-1.0",
+    "collection": "Simple Icons",
+    "file": "/Users/shadow/Documents/code/shark/Assets/icon/src/simple-icons_wireshark.svg"
+  }
+]

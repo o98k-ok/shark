@@ -16,10 +16,17 @@ final class StatusItemController: NSObject, NSMenuDelegate {
         self.panelController = panelController
         super.init()
 
-        statusItem.button?.image = NSImage(
-            systemSymbolName: "chevron.left.forwardslash.chevron.right",
-            accessibilityDescription: "Shark"
-        )
+        if let image = NSImage(named: "MenuBar") {
+            image.isTemplate = true
+            image.size = NSSize(width: 18, height: 18)
+            image.accessibilityDescription = "Shark"
+            statusItem.button?.image = image
+        } else {
+            statusItem.button?.image = NSImage(
+                systemSymbolName: "chevron.left.forwardslash.chevron.right",
+                accessibilityDescription: "Shark"
+            )
+        }
         menu.delegate = self
         statusItem.menu = menu
     }

@@ -1,0 +1,21 @@
+{
+  "background": [
+    "#07120C",
+    "#0E3B24"
+  ],
+  "bgAngle": 170,
+  "subject": {
+    "from": "src/mdi_shark-fin.svg",
+    "source": "mdi:shark-fin",
+    "license": "Apache-2.0",
+    "fill": [
+      "#B9FFD5",
+      "#22C55E"
+    ],
+    "widthPct": 0.62,
+    "cy": 0.5
+  },
+  "name": "b-fin-neon",
+  "glass": true,
+  "grain": 0.06
+}

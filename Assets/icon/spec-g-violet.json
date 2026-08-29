@@ -1,0 +1,23 @@
+{
+  "background": [
+    "#140A28",
+    "#6B3FD4"
+  ],
+  "bgAngle": 165,
+  "subject": {
+    "from": "src/mdi_shark.svg",
+    "source": "mdi:shark",
+    "license": "Apache-2.0",
+    "fill": [
+      "#F6EDFF",
+      "#A97BFF"
+    ],
+    "widthPct": 0.74,
+    "cy": 0.5,
+    "opacity": 0.72,
+    "rimWidth": 9
+  },
+  "name": "g-violet",
+  "glass": true,
+  "grain": 0.06
+}

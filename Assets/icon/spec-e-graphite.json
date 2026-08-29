@@ -1,0 +1,23 @@
+{
+  "background": [
+    "#14161A",
+    "#3A4048"
+  ],
+  "bgAngle": 165,
+  "subject": {
+    "from": "src/mdi_shark.svg",
+    "source": "mdi:shark",
+    "license": "Apache-2.0",
+    "fill": [
+      "#FFFFFF",
+      "#8A939C"
+    ],
+    "widthPct": 0.74,
+    "cy": 0.5,
+    "opacity": 0.72,
+    "rimWidth": 9
+  },
+  "name": "e-graphite",
+  "glass": true,
+  "grain": 0.06
+}

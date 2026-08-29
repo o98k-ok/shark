@@ -3,3 +3,5 @@
 dist/
 *.xcodeproj
 .DS_Store
+# Icon render output; regenerate from Assets/icon/spec.json.
+Assets/icon/out/

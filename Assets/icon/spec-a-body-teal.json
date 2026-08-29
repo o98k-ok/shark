@@ -1,0 +1,21 @@
+{
+  "background": [
+    "#06131F",
+    "#0E6070"
+  ],
+  "bgAngle": 165,
+  "subject": {
+    "from": "src/mdi_shark.svg",
+    "source": "mdi:shark",
+    "license": "Apache-2.0",
+    "fill": [
+      "#F2FAFD",
+      "#5B8DA3"
+    ],
+    "widthPct": 0.74,
+    "cy": 0.5
+  },
+  "name": "a-body-teal",
+  "glass": true,
+  "grain": 0.06
+}

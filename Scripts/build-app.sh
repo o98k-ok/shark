@@ -11,9 +11,18 @@ cd "$ROOT"
 swift build -c "$CONFIGURATION"
 BINARY="$(swift build -c "$CONFIGURATION" --show-bin-path)/Shark"
 
+ICON="$ROOT/Assets/icon/AppIcon.icns"
+MENUBAR="$ROOT/Assets/icon/MenuBar.pdf"
+if [[ ! -f "$ICON" || ! -f "$MENUBAR" ]]; then
+    echo "Missing Assets/icon/AppIcon.icns or MenuBar.pdf" >&2
+    exit 1
+fi
+
 rm -rf "$APP"
 mkdir -p "$APP/Contents/MacOS" "$APP/Contents/Resources"
 cp "$BINARY" "$APP/Contents/MacOS/Shark"
+cp "$ICON" "$APP/Contents/Resources/AppIcon.icns"
+cp "$MENUBAR" "$APP/Contents/Resources/MenuBar.pdf"
 
 cat > "$APP/Contents/Info.plist" <<'PLIST'
 <?xml version="1.0" encoding="UTF-8"?>
@@ -28,6 +37,8 @@ cat > "$APP/Contents/Info.plist" <<'PLIST'
     <string>Shark</string>
     <key>CFBundleIdentifier</key>
     <string>com.o98k.shark</string>
+    <key>CFBundleIconFile</key>
+    <string>AppIcon</string>
     <key>CFBundlePackageType</key>
     <string>APPL</string>
     <key>CFBundleShortVersionString</key>

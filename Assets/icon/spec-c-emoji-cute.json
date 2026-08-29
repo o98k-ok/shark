@@ -1,0 +1,18 @@
+{
+  "background": [
+    "#0A2C3A",
+    "#22A6C4"
+  ],
+  "bgAngle": 160,
+  "subject": {
+    "from": "src/fluent-emoji-flat_shark.svg",
+    "source": "fluent-emoji-flat:shark",
+    "license": "MIT",
+    "keepColors": true,
+    "widthPct": 0.68,
+    "cy": 0.5
+  },
+  "name": "c-emoji-cute",
+  "glass": true,
+  "grain": 0.06
+}
