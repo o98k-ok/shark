@@ -49,9 +49,9 @@ different destination. Enable **Launch at Login** from the menu *after* installi
 the login item records the bundle it was registered from, so a copy still living in
 `dist/` would be the one that starts.
 
-The bundle is ad-hoc signed, so it runs on the machine that built it; moving it to
-another Mac needs real signing and notarization. Version strings live in the
-`Info.plist` heredoc inside `Scripts/build-app.sh`.
+The bundle is signed with a local self-signed identity so macOS privacy grants
+survive rebuilds; moving it to another Mac needs real signing and notarization.
+Version strings live in the `Info.plist` heredoc inside `Scripts/build-app.sh`.
 
 ## Keys
 

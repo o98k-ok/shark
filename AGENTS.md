@@ -70,8 +70,11 @@ These are load-bearing; breaking them produces bugs that look unrelated.
 - The `.app` bundle is not cosmetic: `LSUIElement` (no Dock tile) and
   `SMAppService` login items both require it. `LaunchAtLogin.set` throws when run
   from the bare binary, and the menu surfaces that error rather than swallowing it.
-- Signing is ad-hoc (`codesign --sign -`). Fine locally; it is not a
-  distributable, notarized build.
+- Signing uses a local self-signed identity (`Shark Self-Signed`) in
+  `~/Library/Keychains/shark-signing.keychain-db`, created once by
+  `Scripts/ensure-signing-identity.sh`. Ad-hoc (`codesign --sign -`) pins TCC
+  to the binary cdhash, so Files and Folders grants die on every rebuild. This
+  is still not a distributable, notarized build.
 - Version strings live in the `Info.plist` heredoc inside `Scripts/build-app.sh`.
 - `Scripts/install.sh` refuses to write an unwritable destination instead of
   escalating; never add `sudo` to it. `SHARK_INSTALL_DIR` overrides the target,

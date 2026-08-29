@@ -40,10 +40,22 @@ cat > "$APP/Contents/Info.plist" <<'PLIST'
     <true/>
     <key>NSHighResolutionCapable</key>
     <true/>
+    <key>NSDesktopFolderUsageDescription</key>
+    <string>The terminal needs access to your Desktop, like any other terminal.</string>
+    <key>NSDocumentsFolderUsageDescription</key>
+    <string>The terminal needs access to your Documents folder, like any other terminal.</string>
+    <key>NSDownloadsFolderUsageDescription</key>
+    <string>The terminal needs access to your Downloads folder, like any other terminal.</string>
+    <key>NSRemovableVolumesUsageDescription</key>
+    <string>The terminal needs access to removable volumes, like any other terminal.</string>
+    <key>NSNetworkVolumesUsageDescription</key>
+    <string>The terminal needs access to network volumes, like any other terminal.</string>
 </dict>
 </plist>
 PLIST
 
-codesign --force --sign - "$APP" >/dev/null
+IDENTITY="$("$ROOT/Scripts/ensure-signing-identity.sh")"
+codesign --force --sign "$IDENTITY" "$APP" >/dev/null
+echo "Signed with $IDENTITY"
 
 echo "Built $APP"
