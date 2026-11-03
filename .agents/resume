@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# No services or credentials need repair, and dependencies belong in setup only.
+echo "Shark orb ready. Build and run this AppKit app on a Mac satellite."

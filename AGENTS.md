@@ -90,6 +90,17 @@ These are load-bearing; breaking them produces bugs that look unrelated.
   registered defaults in step.
 - `dist/` and `.build/` are generated and git-ignored. Never commit them.
 
+## Amp orbs
+
+`.agents/setup` installs Swift 6.2.3 through Swiftly and resolves the exact
+`Package.resolved` dependencies in Linux. Amp snapshots the toolchain and SwiftPM
+caches; warm setup reuses them. `.agents/resume` does not install anything.
+The toolchain is available in new login shells, including Amp tool processes.
+
+Linux has no AppKit, Carbon or macOS SDK, so dependency resolution is not a build
+check. Use a Mac satellite for `swift build`, bundle creation and UI verification.
+The Linux snapshot does not cache the Mac satellite's toolchain or build outputs.
+
 ## Style
 
 Match what is there: small types with one job, doc comments that explain *why* a

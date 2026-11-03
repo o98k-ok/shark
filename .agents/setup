@@ -1,0 +1,51 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+cd "$(dirname "${BASH_SOURCE[0]}")/.."
+SECONDS=0
+
+# The Linux toolchain is for package resolution and source tooling, not AppKit builds.
+swift_version=6.2.3
+swiftly_version=1.1.2
+echo "Preparing Swift $swift_version for the Linux orb"
+packages=(ca-certificates curl git gnupg libedit-dev libpython3-dev)
+missing=()
+for package in "${packages[@]}"; do
+    if [[ "$(dpkg-query -W -f='${Status}' "$package" 2>/dev/null || true)" != "install ok installed" ]]; then
+        missing+=("$package")
+    fi
+done
+if (( ${#missing[@]} )); then
+    sudo apt-get update
+    sudo env DEBIAN_FRONTEND=noninteractive apt-get install -y "${missing[@]}"
+fi
+echo "System packages ready (${SECONDS}s)"
+
+export SWIFTLY_HOME_DIR="$HOME/.local/share/swiftly"
+export SWIFTLY_BIN_DIR="$SWIFTLY_HOME_DIR/bin"
+if [[ ! -x "$SWIFTLY_BIN_DIR/swiftly" ]]; then
+    temporary_dir="$(mktemp -d)"
+    trap 'rm -rf "$temporary_dir"' EXIT
+    curl --fail --location --retry 3 \
+        "https://download.swift.org/swiftly/linux/swiftly-${swiftly_version}-$(uname -m).tar.gz" \
+        -o "$temporary_dir/swiftly.tar.gz"
+    tar -xzf "$temporary_dir/swiftly.tar.gz" -C "$temporary_dir"
+    "$temporary_dir/swiftly" init --skip-install --no-modify-profile --assume-yes --quiet-shell-followup
+fi
+source "$SWIFTLY_HOME_DIR/env.sh"
+swiftly install "$swift_version" --assume-yes
+swiftly use "$swift_version" --global-default --assume-yes
+swiftly link --assume-yes
+
+# Amp starts in a separate login shell; exporting PATH only here is insufficient.
+profile_line='[ ! -f "$HOME/.local/share/swiftly/env.sh" ] || . "$HOME/.local/share/swiftly/env.sh"'
+if ! grep -Fqx "$profile_line" "$HOME/.bash_profile" 2>/dev/null; then
+    printf '\n%s\n' "$profile_line" >> "$HOME/.bash_profile"
+fi
+swift --version
+echo "Swift ready (${SECONDS}s)"
+
+# Never update Package.resolved during setup; reuse SwiftPM's restored checkouts.
+swift package resolve --force-resolved-versions
+echo "Locked dependencies ready (${SECONDS}s total)"
+echo "Shark requires macOS: use a Mac satellite for swift build and app verification."

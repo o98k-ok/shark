@@ -5,3 +5,4 @@ dist/
 .DS_Store
 # Icon render output; regenerate from Assets/icon/spec.json.
 Assets/icon/out/
+.amp/portals/*
